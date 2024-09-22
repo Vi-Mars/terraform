@@ -27,7 +27,9 @@ variable "vm_web_preemptible" {
 }
 variable "vm_web_nat" {
   type = bool
-  default = true
+  default = false
+
+#  default = true
 }
 variable "vm_web_serial-port-enable" {
   type = number
@@ -63,6 +65,7 @@ variable "vm_db_preemptible" {
 variable "vm_db_nat" {
   type = bool
   default = true
+#  default = false
 }
 variable "vm_db_serial-port-enable" {
   type = number

@@ -6,17 +6,33 @@ resource "yandex_vpc_subnet" "develop" {
   zone           = var.default_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.default_cidr
+  route_table_id = yandex_vpc_route_table.rt.id
+# router
 }
-
 
 resource "yandex_vpc_subnet" "db" {
   name           = var.vpc_name_db
   zone           = var.default_zone_db
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.default_cidr_db
+  route_table_id = yandex_vpc_route_table.rt.id
+# router
 }
+### nat
+resource "yandex_vpc_gateway" "nat_gateway" {
+  name = "test-gateway"
+  shared_egress_gateway {}
+} 
+### router
+resource "yandex_vpc_route_table" "rt" {
+  name       = "test-route-table"
+  network_id = yandex_vpc_network.develop.id
 
-
+  static_route {
+    destination_prefix = "0.0.0.0/0"
+    gateway_id         = yandex_vpc_gateway.nat_gateway.id
+  }
+}
 
 data "yandex_compute_image" "ubuntu" {
 #   family = "ubuntu-2004-lts"
