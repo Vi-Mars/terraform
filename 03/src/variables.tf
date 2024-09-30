@@ -30,3 +30,48 @@ variable "vpc_name" {
   default     = "develop"
   description = "VPC network&subnet name"
 }
+
+variable "vm_image" {
+  type = string
+  default = "ubuntu-2004-lts"
+  description = "VM image"
+}
+
+variable "web_platform" {
+  type = string
+  default = "standard-v3"
+  description = "VM platform id"
+}
+variable "web_cores" {
+  type = number
+  default = 2
+  description = "VM core number"
+}
+variable "web_memory" {
+  type = number
+  default = 2
+  description = "VM memory number"
+}
+variable "web_core_fraction" {
+  type = number
+  default = 20
+  description = "VM core fraction"
+}
+variable "web_scheduling_policy" {
+  type = bool
+  default = true
+  description = "VM preemptible"
+}
+variable "web_nat_network_interface" {
+  type = bool
+  default = true
+  description = "VM nat"
+}
+
+variable "metadata_serial-port-enable" {
+  type = number
+  default = 1
+  description = "metadata_serial-port-enable"
+}
+
+
